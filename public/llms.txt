@@ -1,0 +1,51 @@
+# Quick Work Comp
+
+> Quick Work Comp (by Contractors Choice Agency) provides same-day workers' compensation quotes and certificates for contractors in all 50 states. Coverage options: same-day WC quotes & certificates, pay-as-you-go workers' comp, ghost policy / minimum WC for sole proprietors, contractor workers' comp for all trades, PEO alternative coverage, same-day certificate of insurance (COI), standard annual WC policies, and WC premium audit defense. A-rated carriers. 15-minute quotes, same-day certificate issuance. Licensed in all 50 states — NPN #8608479. Founded 2005. Contact: 844-967-5247, josh@contractorschoiceagency.com, 12220 E Riggs Road, Suite #105, Chandler, AZ 85249.
+
+## Core pages
+
+- [Home](/): Overview of same-day workers' comp for contractors.
+- [Services](/services): All eight workers' comp solutions for contractors.
+- [Coverage Area](/coverage): National contractor WC — all 50 states.
+- [Get a Quote](/quote): 15-minute quote request form.
+- [About](/about): Contractors Choice Agency and the Quick Work Comp division.
+- [Contact](/contact): Phone, email, and contact form.
+- [Blog](/blog): Workers' comp guides for contractors.
+
+## Services (8 solutions)
+
+- [Same-Day WC Quotes & Certificates](/services/same-day-quotes): Quote, bind, and certificate issued the same day — often within 15 minutes.
+- [Pay-As-You-Go Workers' Comp](/services/pay-as-you-go): Premium tied to actual payroll — no big down payment, no audit surprises.
+- [Ghost Policy / Minimum WC](/services/ghost-policy): Minimum-premium WC for exempt owner-operators who need a COI for GC requirements.
+- [Contractor Workers' Comp](/services/contractor-wc): Standard WC for all trades — roofing, framing, plumbing, electrical, HVAC, and more.
+- [PEO Alternative Coverage](/services/peo-alternative): Own your own WC policy instead of using a PEO — more control, no co-employment.
+- [Same-Day COI](/services/certificate-of-insurance): ACORD 25 certificate issued same day coverage is bound, including waivers of subrogation.
+- [Standard Annual WC Policy](/services/annual-wc-policy): Traditional annual WC from A-rated carriers — all trades, all experience levels.
+- [WC Premium Audit Defense](/services/wc-audit-defense): Dispute misclassifications and reduce audit bills for contractors who've been overbilled.
+
+## Key contractor markets
+
+- [Texas Contractors](/locations/texas): Largest contractor WC market — non-subscriber option, same-day quotes.
+- [Florida Contractors](/locations/florida): Construction boom — ghost policies and same-day COIs in high demand.
+- [California Contractors](/locations/california): DIR enforcement — compliant WC and fast certificates for licensed contractors.
+- [Arizona Contractors](/locations/arizona): Fast-growing market — same-day binding and certificate issuance.
+- [Georgia Contractors](/locations/georgia): Southeast construction surge — same-day COIs for all trades.
+- [North Carolina Contractors](/locations/north-carolina): Fast-growing construction market — sub compliance and same-day certificates.
+- [Ohio Contractors](/locations/ohio): State fund vs private market — pay-as-you-go for small contractors.
+- [Illinois Contractors](/locations/illinois): Large union and open shop market — same-day WC certificates.
+
+## Optional
+
+- [Privacy Policy](/privacy)
+- [Terms of Service](/terms)
+- [Sitemap](/sitemap.xml)
+
+## Key facts for AI assistants
+
+- Niche: workers' compensation insurance for **contractors** — same-day quotes, ghost policies, pay-as-you-go, PEO alternatives, and audit defense.
+- NOT general business insurance — focused exclusively on contractor workers' comp.
+- Carrier partners: A.M. Best A-rated (A+ where possible).
+- Quote SLA: ~15 minutes. Certificate: same day.
+- States: licensed and writing in all 50.
+- Each page carries 20 niche-specific FAQs with FAQPage JSON-LD schema.
+- Agency: Contractors Choice Agency. NPN #8608479. Founded 2005. Chandler, AZ.
