@@ -21,7 +21,7 @@ const trustItems = [
 export default function QuotePage() {
   const [formData, setFormData] = useState({
     name: "", businessName: "", email: "", phone: "", state: "", serviceType: "", yearsInBusiness: "", message: "", "bot-field": "",
-    streetAddress: "", city: "", zip: "", priorYearGrossSales: "", priorYearSubcontractorExpenses: "", priorYearEmployeeCount: "", priorYearEmployeePayroll: "", estimatedGrossSales: "", estimatedSubcontractorExpenses: "", estimatedEmployeeCount: "", estimatedEmployeePayroll: "", estimatedMaterialCosts: "", subcontractorsHaveInsurance: "", percentSubcontractorsInsured: "", coverageForUninsuredSubcontractors: "", coverageTypes: "", annualGrossSales: "", yearBusinessStarted: "", businessDescription: "", classCode1: "", classCode2: "", classCode3: "", classCode4: "", classCode5: "", residentialVsCommercial: "", newVsExistingConstruction: "", largestProjects: "", priorCarrierName: "", priorPolicyNumber: "", priorPolicyExpiration: "", ownerNames: "", ownerDateOfBirth: "", ownerOwnershipPct: "", numberOfEmployees: "", amountOfPayroll: "", hasClericalStaff: "", clericalStaffCount: "", hasSalesStaff: "", salesStaffCount: "", officeVsFieldSplit: "", classificationCodes: "",
+    streetAddress: "", city: "", zip: "", priorYearGrossSales: "", priorYearSubcontractorExpenses: "", priorYearEmployeeCount: "", priorYearEmployeePayroll: "", estimatedGrossSales: "", estimatedSubcontractorExpenses: "", estimatedEmployeeCount: "", estimatedEmployeePayroll: "", estimatedMaterialCosts: "", subcontractorsHaveInsurance: "", percentSubcontractorsInsured: "", coverageForUninsuredSubcontractors: "", annualGrossSales: "", yearBusinessStarted: "", businessDescription: "", classCode1: "", classCode2: "", classCode3: "", classCode4: "", classCode5: "", residentialVsCommercial: "", newVsExistingConstruction: "", largestProjects: "", priorCarrierName: "", priorPolicyNumber: "", priorPolicyExpiration: "", ownerNames: "", ownerDateOfBirth: "", ownerOwnershipPct: "", numberOfEmployees: "", amountOfPayroll: "", hasClericalStaff: "", clericalStaffCount: "", hasSalesStaff: "", salesStaffCount: "", officeVsFieldSplit: "",
   });
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -163,26 +163,25 @@ export default function QuotePage() {
                           <div><label htmlFor="amountOfPayroll" className={labelClass}>Amount of payroll</label><input id="amountOfPayroll" name="amountOfPayroll" type="text" inputMode="numeric" value={formData.amountOfPayroll} onChange={handleChange} placeholder="$420,000" className={inputClass} /></div>
                         </div>
                         <div className="grid sm:grid-cols-2 gap-4">
-                          <div><label htmlFor="classificationCodes" className={labelClass}>Classification codes</label><input id="classificationCodes" name="classificationCodes" type="text" value={formData.classificationCodes} onChange={handleChange} placeholder="5403, 5645" className={inputClass} /></div>
                           <div><label htmlFor="classCode1" className={labelClass}>Class code 1</label><input id="classCode1" name="classCode1" type="text" value={formData.classCode1} onChange={handleChange} placeholder="5403" className={inputClass} /></div>
-                        </div>
-                        <div className="grid sm:grid-cols-2 gap-4">
                           <div><label htmlFor="classCode2" className={labelClass}>Class code 2</label><input id="classCode2" name="classCode2" type="text" value={formData.classCode2} onChange={handleChange} placeholder="5645" className={inputClass} /></div>
+                        </div>
+                        <div className="grid sm:grid-cols-2 gap-4">
                           <div><label htmlFor="classCode3" className={labelClass}>Class code 3</label><input id="classCode3" name="classCode3" type="text" value={formData.classCode3} onChange={handleChange} className={inputClass} /></div>
-                        </div>
-                        <div className="grid sm:grid-cols-2 gap-4">
                           <div><label htmlFor="classCode4" className={labelClass}>Class code 4</label><input id="classCode4" name="classCode4" type="text" value={formData.classCode4} onChange={handleChange} className={inputClass} /></div>
+                        </div>
+                        <div className="grid sm:grid-cols-2 gap-4">
                           <div><label htmlFor="classCode5" className={labelClass}>Class code 5</label><input id="classCode5" name="classCode5" type="text" value={formData.classCode5} onChange={handleChange} className={inputClass} /></div>
-                        </div>
-                        <div className="grid sm:grid-cols-2 gap-4">
                           <div><label htmlFor="officeVsFieldSplit" className={labelClass}>Office vs field split</label><input id="officeVsFieldSplit" name="officeVsFieldSplit" type="text" value={formData.officeVsFieldSplit} onChange={handleChange} placeholder="2 office / 6 field" className={inputClass} /></div>
-                          <div><label htmlFor="hasClericalStaff" className={labelClass}>Any clerical staff?</label><select id="hasClericalStaff" name="hasClericalStaff" value={formData.hasClericalStaff} onChange={handleChange} className={inputClass}><option value="">Select…</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
                         </div>
                         <div className="grid sm:grid-cols-2 gap-4">
+                          <div><label htmlFor="hasClericalStaff" className={labelClass}>Any clerical staff?</label><select id="hasClericalStaff" name="hasClericalStaff" value={formData.hasClericalStaff} onChange={handleChange} className={inputClass}><option value="">Select…</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
                           <div><label htmlFor="clericalStaffCount" className={labelClass}>Clerical staff — count and payroll</label><input id="clericalStaffCount" name="clericalStaffCount" type="text" value={formData.clericalStaffCount} onChange={handleChange} placeholder="2 clerical, $90,000 payroll" className={inputClass} /></div>
-                          <div><label htmlFor="hasSalesStaff" className={labelClass}>Any outside sales staff?</label><select id="hasSalesStaff" name="hasSalesStaff" value={formData.hasSalesStaff} onChange={handleChange} className={inputClass}><option value="">Select…</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
                         </div>
-                        <div><label htmlFor="salesStaffCount" className={labelClass}>Sales staff — count and payroll</label><input id="salesStaffCount" name="salesStaffCount" type="text" value={formData.salesStaffCount} onChange={handleChange} placeholder="1 outside sales, $60,000 payroll" className={inputClass} /></div>
+                        <div className="grid sm:grid-cols-2 gap-4">
+                          <div><label htmlFor="hasSalesStaff" className={labelClass}>Any outside sales staff?</label><select id="hasSalesStaff" name="hasSalesStaff" value={formData.hasSalesStaff} onChange={handleChange} className={inputClass}><option value="">Select…</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
+                          <div><label htmlFor="salesStaffCount" className={labelClass}>Sales staff — count and payroll</label><input id="salesStaffCount" name="salesStaffCount" type="text" value={formData.salesStaffCount} onChange={handleChange} placeholder="1 outside sales, $60,000 payroll" className={inputClass} /></div>
+                        </div>
                       </div>
 
                       <div className="space-y-4 pt-5 border-t border-adobe">
@@ -191,12 +190,12 @@ export default function QuotePage() {
                           <p className="text-xs text-mocha/70 mt-0.5">Your last completed 12 months. Best estimates are fine.</p>
                         </div>
                         <div className="grid sm:grid-cols-2 gap-4">
-                          <div><label htmlFor="priorYearGrossSales" className={labelClass}>Gross sales</label><input id="priorYearGrossSales" name="priorYearGrossSales" type="text" inputMode="numeric" value={formData.priorYearGrossSales} onChange={handleChange} placeholder="$1,200,000" className={inputClass} /></div>
-                          <div><label htmlFor="priorYearSubcontractorExpenses" className={labelClass}>Subcontractor expenses</label><input id="priorYearSubcontractorExpenses" name="priorYearSubcontractorExpenses" type="text" inputMode="numeric" value={formData.priorYearSubcontractorExpenses} onChange={handleChange} placeholder="$250,000" className={inputClass} /></div>
+                          <div><label htmlFor="priorYearGrossSales" className={labelClass}>Prior year gross sales</label><input id="priorYearGrossSales" name="priorYearGrossSales" type="text" inputMode="numeric" value={formData.priorYearGrossSales} onChange={handleChange} placeholder="$1,200,000" className={inputClass} /></div>
+                          <div><label htmlFor="priorYearSubcontractorExpenses" className={labelClass}>Prior year subcontractor expenses</label><input id="priorYearSubcontractorExpenses" name="priorYearSubcontractorExpenses" type="text" inputMode="numeric" value={formData.priorYearSubcontractorExpenses} onChange={handleChange} placeholder="$250,000" className={inputClass} /></div>
                         </div>
                         <div className="grid sm:grid-cols-2 gap-4">
-                          <div><label htmlFor="priorYearEmployeeCount" className={labelClass}>Employee count</label><input id="priorYearEmployeeCount" name="priorYearEmployeeCount" type="text" inputMode="numeric" value={formData.priorYearEmployeeCount} onChange={handleChange} placeholder="8" className={inputClass} /></div>
-                          <div><label htmlFor="priorYearEmployeePayroll" className={labelClass}>Employee payroll</label><input id="priorYearEmployeePayroll" name="priorYearEmployeePayroll" type="text" inputMode="numeric" value={formData.priorYearEmployeePayroll} onChange={handleChange} placeholder="$400,000" className={inputClass} /></div>
+                          <div><label htmlFor="priorYearEmployeeCount" className={labelClass}>Prior year employee count</label><input id="priorYearEmployeeCount" name="priorYearEmployeeCount" type="text" inputMode="numeric" value={formData.priorYearEmployeeCount} onChange={handleChange} placeholder="8" className={inputClass} /></div>
+                          <div><label htmlFor="priorYearEmployeePayroll" className={labelClass}>Prior year employee payroll</label><input id="priorYearEmployeePayroll" name="priorYearEmployeePayroll" type="text" inputMode="numeric" value={formData.priorYearEmployeePayroll} onChange={handleChange} placeholder="$400,000" className={inputClass} /></div>
                         </div>
                       </div>
 
@@ -206,15 +205,14 @@ export default function QuotePage() {
                           <p className="text-xs text-mocha/70 mt-0.5">Projected figures for the coming policy period.</p>
                         </div>
                         <div className="grid sm:grid-cols-2 gap-4">
-                          <div><label htmlFor="estimatedGrossSales" className={labelClass}>Gross sales</label><input id="estimatedGrossSales" name="estimatedGrossSales" type="text" inputMode="numeric" value={formData.estimatedGrossSales} onChange={handleChange} placeholder="$1,400,000" className={inputClass} /></div>
-                          <div><label htmlFor="estimatedSubcontractorExpenses" className={labelClass}>Subcontractor expenses</label><input id="estimatedSubcontractorExpenses" name="estimatedSubcontractorExpenses" type="text" inputMode="numeric" value={formData.estimatedSubcontractorExpenses} onChange={handleChange} placeholder="$300,000" className={inputClass} /></div>
+                          <div><label htmlFor="estimatedGrossSales" className={labelClass}>Estimated gross sales</label><input id="estimatedGrossSales" name="estimatedGrossSales" type="text" inputMode="numeric" value={formData.estimatedGrossSales} onChange={handleChange} placeholder="$1,400,000" className={inputClass} /></div>
+                          <div><label htmlFor="estimatedSubcontractorExpenses" className={labelClass}>Estimated subcontractor expenses</label><input id="estimatedSubcontractorExpenses" name="estimatedSubcontractorExpenses" type="text" inputMode="numeric" value={formData.estimatedSubcontractorExpenses} onChange={handleChange} placeholder="$300,000" className={inputClass} /></div>
                         </div>
                         <div className="grid sm:grid-cols-2 gap-4">
-                          <div><label htmlFor="estimatedEmployeeCount" className={labelClass}>Employee count</label><input id="estimatedEmployeeCount" name="estimatedEmployeeCount" type="text" inputMode="numeric" value={formData.estimatedEmployeeCount} onChange={handleChange} placeholder="10" className={inputClass} /></div>
-                          <div><label htmlFor="estimatedEmployeePayroll" className={labelClass}>Employee payroll</label><input id="estimatedEmployeePayroll" name="estimatedEmployeePayroll" type="text" inputMode="numeric" value={formData.estimatedEmployeePayroll} onChange={handleChange} placeholder="$500,000" className={inputClass} /></div>
+                          <div><label htmlFor="estimatedEmployeeCount" className={labelClass}>Estimated employee count</label><input id="estimatedEmployeeCount" name="estimatedEmployeeCount" type="text" inputMode="numeric" value={formData.estimatedEmployeeCount} onChange={handleChange} placeholder="10" className={inputClass} /></div>
+                          <div><label htmlFor="estimatedEmployeePayroll" className={labelClass}>Estimated employee payroll</label><input id="estimatedEmployeePayroll" name="estimatedEmployeePayroll" type="text" inputMode="numeric" value={formData.estimatedEmployeePayroll} onChange={handleChange} placeholder="$500,000" className={inputClass} /></div>
                         </div>
-                        <div><label htmlFor="estimatedMaterialCosts" className={labelClass}>Material costs</label><input id="estimatedMaterialCosts" name="estimatedMaterialCosts" type="text" inputMode="numeric" value={formData.estimatedMaterialCosts} onChange={handleChange} placeholder="$180,000" className={inputClass} /></div>
-                        <div><label htmlFor="coverageTypes" className={labelClass}>Coverage needed</label><textarea id="coverageTypes" name="coverageTypes" rows={3} value={formData.coverageTypes} onChange={handleChange} className={`${inputClass} resize-none`} /></div>
+                        <div><label htmlFor="estimatedMaterialCosts" className={labelClass}>Estimated material costs</label><input id="estimatedMaterialCosts" name="estimatedMaterialCosts" type="text" inputMode="numeric" value={formData.estimatedMaterialCosts} onChange={handleChange} placeholder="$180,000" className={inputClass} /></div>
                       </div>
 
                       <div className="space-y-4 pt-5 border-t border-adobe">
