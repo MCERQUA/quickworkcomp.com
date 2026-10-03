@@ -54,11 +54,6 @@ export const COPY = {
   process: {
     lead: "No two-week wait. Tell us about your trade and payroll, we shop the market, and you get a quote and certificate the same day.",
   },
-  testimonials: {
-    eyebrow: "From contractors",
-    h2Lead: "Contractors who got covered",
-    h2Highlight: "the same day they called",
-  },
   finalCta: {
     h2Lead: "Get Your Workers' Comp",
     h2Highlight: "quote and certificate today.",

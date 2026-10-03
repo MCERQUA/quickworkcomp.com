@@ -8,7 +8,7 @@ export const SITE = {
   phone: "844-967-5247",
   phoneHref: "tel:+18449675247",
   email: "josh@contractorschoiceagency.com",
-  address: "12220 E Riggs Road, Suite #105, Chandler, AZ 85249",
+  address: "12220 E Riggs Road, Suite #104, Chandler, AZ 85249",
   founded: 2005,
   npn: "8608479",
 } as const;
@@ -115,23 +115,6 @@ export const LOCATIONS = [
   { slug: "illinois", name: "Illinois", state: "Illinois", region: "IL", blurb: "Illinois has a large union and open shop contractor market with strict certificate requirements. We bind WC for Illinois contractors across all trades and issue COIs same day.", note: "Large union and open shop contractor market — certificate requirements" },
 ] as const;
 
-export const TESTIMONIALS = [
-  {
-    quote: "I called on a Friday afternoon needing a COI by Monday morning for a roofing job. They had my policy bound and certificate emailed within the hour. Unreal service.",
-    author: "Mike T.",
-    role: "Roofing Contractor, Florida",
-  },
-  {
-    quote: "I'm a one-man plumbing operation in Texas and needed a ghost policy so a GC would let me on the job. Quick Work Comp got it done in under 20 minutes. Exactly what I needed.",
-    author: "Carlos R.",
-    role: "Plumbing Contractor, Texas",
-  },
-  {
-    quote: "I've been a general contractor in Arizona for 15 years and I've never gotten a workers' comp quote this fast. They found me a better rate than my last carrier and had the certificate same day.",
-    author: "Dave K.",
-    role: "General Contractor, Arizona",
-  },
-] as const;
 
 export const CREDENTIALS = [
   { label: "Licensed in all 50 states", icon: "MapPin" },
