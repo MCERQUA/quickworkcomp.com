@@ -22,8 +22,10 @@ const trustItems = [
 export default function QuotePage() {
   const [ownerFields, setOwnerFields] = useState<Record<string, string>>({});
   const [formData, setFormData] = useState({
-    name: "", businessName: "", email: "", phone: "", state: "", serviceType: "", yearsInBusiness: "", message: "", "bot-field": "",
-    streetAddress: "", city: "", zip: "", priorYearGrossSales: "", priorYearSubcontractorExpenses: "", priorYearEmployeeCount: "", priorYearEmployeePayroll: "", estimatedGrossSales: "", estimatedSubcontractorExpenses: "", estimatedEmployeeCount: "", estimatedEmployeePayroll: "", estimatedMaterialCosts: "", subcontractorsHaveInsurance: "", percentSubcontractorsInsured: "", coverageForUninsuredSubcontractors: "", annualGrossSales: "", yearBusinessStarted: "", businessDescription: "", classCode1: "", classCode2: "", classCode3: "", classCode4: "", classCode5: "", residentialVsCommercial: "", newVsExistingConstruction: "", largestProjects: "", priorCarrierName: "", priorPolicyNumber: "", priorPolicyExpiration: "", ownerNames: "", ownerDateOfBirth: "", ownerOwnershipPct: "", numberOfEmployees: "", amountOfPayroll: "", hasClericalStaff: "", clericalStaffCount: "", hasSalesStaff: "", salesStaffCount: "", officeVsFieldSplit: "",
+    name: "", businessName: "", email: "", phone: "", state: "", serviceType: "", yearsInBusiness: "", notes: "", "bot-field": "",
+    streetAddress: "", city: "", zip: "", priorYearRevenue: "", priorYearSubcontractorExpenses: "", priorYearEmployeeCount: "", priorYearEmployeePayroll: "", estimatedGrossSales: "", estimatedSubcontractorExpenses: "", estimatedEmployeeCount: "", estimatedEmployeePayroll: "", estimatedMaterialCosts: "", subsCarryInsurance: "", percentSubcontractorsInsured: "", coverageForUninsuredSubcontractors: "", annualRevenue: "", yearBusinessStarted: "", businessDescription: "", classCode1: "", classCode2: "", classCode3: "", classCode4: "", classCode5: "", residentialVsCommercial: "", newVsExistingConstruction: "", largestProjectValue: "", largestProjectDescription: "", currentCarrier: "", priorPolicyNumber: "", currentPolicyExpiration: "", ownerNames: "", ownerDateOfBirth: "", ownerOwnershipPct: "", numberOfEmployees: "", amountOfPayroll: "", hasClericalStaff: "", clericalStaffCount: "", hasSalesStaff: "", salesStaffCount: "", officeVsFieldSplit: "",
+    // ACORD-125/126 gap-fix additions (josh-desk-2, 2026-11-12 — see commit message for the spec audit)
+    fein: "", entityType: "", firstName: "", lastName: "", desiredEffectiveDate: "", currentlyInsured: "", usesSubcontractors: "", lossesLast3Years: "", lossCount: "", lossDescription: "", fullTimeEmployees: "", partTimeEmployees: "",
   });
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -111,6 +113,26 @@ export default function QuotePage() {
                       </div>
 
                       <div className="grid sm:grid-cols-2 gap-4">
+                        <div><label htmlFor="firstName" className={labelClass}>First name *</label><input id="firstName" name="firstName" type="text" required value={formData.firstName} onChange={handleChange} placeholder="Jane" className={inputClass} /></div>
+                        <div><label htmlFor="lastName" className={labelClass}>Last name *</label><input id="lastName" name="lastName" type="text" required value={formData.lastName} onChange={handleChange} placeholder="Smith" className={inputClass} /></div>
+                      </div>
+
+                      <div className="grid sm:grid-cols-2 gap-4">
+                        <div><label htmlFor="entityType" className={labelClass}>Business entity type *</label>
+                          <select id="entityType" name="entityType" required value={formData.entityType} onChange={handleChange} className={inputClass}>
+                            <option value="">Select…</option>
+                            <option value="Individual/Sole prop">Individual / Sole prop</option>
+                            <option value="Partnership">Partnership</option>
+                            <option value="Corporation">Corporation</option>
+                            <option value="LLC">LLC</option>
+                            <option value="Joint venture">Joint venture</option>
+                            <option value="Other">Other</option>
+                          </select>
+                        </div>
+                        <div><label htmlFor="fein" className={labelClass}>FEIN (business tax ID) *</label><input id="fein" name="fein" type="text" required value={formData.fein} onChange={handleChange} placeholder="12-3456789" className={inputClass} /></div>
+                      </div>
+
+                      <div className="grid sm:grid-cols-2 gap-4">
                         <div><label htmlFor="email" className={labelClass}>Email *</label><input id="email" name="email" type="email" required value={formData.email} onChange={handleChange} placeholder={COPY.quote.emailPlaceholder} className={inputClass} /></div>
                         <div><label htmlFor="phone" className={labelClass}>Phone *</label><input id="phone" name="phone" type="tel" required value={formData.phone} onChange={handleChange} placeholder={COPY.quote.phonePlaceholder} className={inputClass} /></div>
                       </div>
@@ -133,14 +155,15 @@ export default function QuotePage() {
                           <h3 className="font-heading font-bold text-espresso text-sm uppercase tracking-wider">Business details</h3>
                           <p className="text-xs text-mocha/70 mt-0.5">What the business does and how long it has been running.</p>
                         </div>
-                        <div><label htmlFor="yearBusinessStarted" className={labelClass}>Year business started</label><input id="yearBusinessStarted" name="yearBusinessStarted" type="text" inputMode="numeric" value={formData.yearBusinessStarted} onChange={handleChange} placeholder="2015" className={inputClass} /></div>
-                        <div><label htmlFor="businessDescription" className={labelClass}>Description of the business</label><textarea id="businessDescription" name="businessDescription" rows={3} value={formData.businessDescription} onChange={handleChange} placeholder="What the business does, day to day" className={`${inputClass} resize-none`} /></div>
+                        <div><label htmlFor="yearBusinessStarted" className={labelClass}>Year business started *</label><input id="yearBusinessStarted" name="yearBusinessStarted" type="text" inputMode="numeric" required value={formData.yearBusinessStarted} onChange={handleChange} placeholder="2015" className={inputClass} /></div>
+                        <div><label htmlFor="businessDescription" className={labelClass}>Description of the business *</label><textarea id="businessDescription" name="businessDescription" rows={3} required value={formData.businessDescription} onChange={handleChange} placeholder="What the business does, day to day" className={`${inputClass} resize-none`} /></div>
                         <div className="grid sm:grid-cols-2 gap-4">
-                          <div><label htmlFor="annualGrossSales" className={labelClass}>Annual gross sales</label><input id="annualGrossSales" name="annualGrossSales" type="text" inputMode="numeric" value={formData.annualGrossSales} onChange={handleChange} placeholder="$1,200,000" className={inputClass} /></div>
+                          <div><label htmlFor="annualRevenue" className={labelClass}>Annual gross sales (annual revenue) *</label><input id="annualRevenue" name="annualRevenue" type="text" inputMode="numeric" required value={formData.annualRevenue} onChange={handleChange} placeholder="$1,200,000" className={inputClass} /></div>
                           <div><label htmlFor="residentialVsCommercial" className={labelClass}>Residential vs commercial split</label><input id="residentialVsCommercial" name="residentialVsCommercial" type="text" value={formData.residentialVsCommercial} onChange={handleChange} placeholder="70% residential / 30% commercial" className={inputClass} /></div>
                         </div>
                         <div><label htmlFor="newVsExistingConstruction" className={labelClass}>New vs existing construction</label><input id="newVsExistingConstruction" name="newVsExistingConstruction" type="text" value={formData.newVsExistingConstruction} onChange={handleChange} placeholder="Mostly existing structures" className={inputClass} /></div>
-                        <div><label htmlFor="largestProjects" className={labelClass}>Largest projects</label><textarea id="largestProjects" name="largestProjects" rows={3} value={formData.largestProjects} onChange={handleChange} placeholder="Three largest jobs in the last year — value and scope" className={`${inputClass} resize-none`} /></div>
+                        <div><label htmlFor="largestProjectValue" className={labelClass}>Largest project value *</label><input id="largestProjectValue" name="largestProjectValue" type="text" inputMode="numeric" required value={formData.largestProjectValue} onChange={handleChange} placeholder="$450,000" className={inputClass} /></div>
+                        <div><label htmlFor="largestProjectDescription" className={labelClass}>Largest projects</label><textarea id="largestProjectDescription" name="largestProjectDescription" rows={3} value={formData.largestProjectDescription} onChange={handleChange} placeholder="Three largest jobs in the last year — value and scope" className={`${inputClass} resize-none`} /></div>
                       </div>
 
                       <div className="space-y-4 pt-5 border-t border-adobe">
@@ -149,10 +172,10 @@ export default function QuotePage() {
                           <p className="text-xs text-mocha/70 mt-0.5">Where your operation is based.</p>
                         </div>
                         <div className="grid sm:grid-cols-2 gap-4">
-                          <div><label htmlFor="streetAddress" className={labelClass}>Street address</label><input id="streetAddress" name="streetAddress" type="text" value={formData.streetAddress} onChange={handleChange} placeholder="123 Main St, Suite 200" className={inputClass} /></div>
-                          <div><label htmlFor="city" className={labelClass}>City</label><input id="city" name="city" type="text" value={formData.city} onChange={handleChange} placeholder="Phoenix" className={inputClass} /></div>
+                          <div><label htmlFor="streetAddress" className={labelClass}>Street address *</label><input id="streetAddress" name="streetAddress" type="text" required value={formData.streetAddress} onChange={handleChange} placeholder="123 Main St, Suite 200" className={inputClass} /></div>
+                          <div><label htmlFor="city" className={labelClass}>City *</label><input id="city" name="city" type="text" required value={formData.city} onChange={handleChange} placeholder="Phoenix" className={inputClass} /></div>
                         </div>
-                        <div><label htmlFor="zip" className={labelClass}>ZIP code</label><input id="zip" name="zip" type="text" value={formData.zip} onChange={handleChange} placeholder="85001" className={inputClass} /></div>
+                        <div><label htmlFor="zip" className={labelClass}>ZIP code *</label><input id="zip" name="zip" type="text" required value={formData.zip} onChange={handleChange} placeholder="85001" className={inputClass} /></div>
                       </div>
 
                       <div className="space-y-4 pt-5 border-t border-adobe">
@@ -163,6 +186,10 @@ export default function QuotePage() {
                         <div className="grid sm:grid-cols-2 gap-4">
                           <div><label htmlFor="numberOfEmployees" className={labelClass}>Number of employees</label><input id="numberOfEmployees" name="numberOfEmployees" type="text" inputMode="numeric" value={formData.numberOfEmployees} onChange={handleChange} placeholder="8" className={inputClass} /></div>
                           <div><label htmlFor="amountOfPayroll" className={labelClass}>Amount of payroll</label><input id="amountOfPayroll" name="amountOfPayroll" type="text" inputMode="numeric" value={formData.amountOfPayroll} onChange={handleChange} placeholder="$420,000" className={inputClass} /></div>
+                        </div>
+                        <div className="grid sm:grid-cols-2 gap-4">
+                          <div><label htmlFor="fullTimeEmployees" className={labelClass}>Full-time employees *</label><input id="fullTimeEmployees" name="fullTimeEmployees" type="text" inputMode="numeric" required value={formData.fullTimeEmployees} onChange={handleChange} placeholder="6" className={inputClass} /></div>
+                          <div><label htmlFor="partTimeEmployees" className={labelClass}>Part-time employees</label><input id="partTimeEmployees" name="partTimeEmployees" type="text" inputMode="numeric" value={formData.partTimeEmployees} onChange={handleChange} placeholder="2" className={inputClass} /></div>
                         </div>
                         <div className="grid sm:grid-cols-2 gap-4">
                           <div><label htmlFor="classCode1" className={labelClass}>Class code 1</label><input id="classCode1" name="classCode1" type="text" value={formData.classCode1} onChange={handleChange} placeholder="5403" className={inputClass} /></div>
@@ -192,7 +219,7 @@ export default function QuotePage() {
                           <p className="text-xs text-mocha/70 mt-0.5">Your last completed 12 months. Best estimates are fine.</p>
                         </div>
                         <div className="grid sm:grid-cols-2 gap-4">
-                          <div><label htmlFor="priorYearGrossSales" className={labelClass}>Prior year gross sales</label><input id="priorYearGrossSales" name="priorYearGrossSales" type="text" inputMode="numeric" value={formData.priorYearGrossSales} onChange={handleChange} placeholder="$1,200,000" className={inputClass} /></div>
+                          <div><label htmlFor="priorYearRevenue" className={labelClass}>Prior year gross sales</label><input id="priorYearRevenue" name="priorYearRevenue" type="text" inputMode="numeric" value={formData.priorYearRevenue} onChange={handleChange} placeholder="$1,200,000" className={inputClass} /></div>
                           <div><label htmlFor="priorYearSubcontractorExpenses" className={labelClass}>Prior year subcontractor expenses</label><input id="priorYearSubcontractorExpenses" name="priorYearSubcontractorExpenses" type="text" inputMode="numeric" value={formData.priorYearSubcontractorExpenses} onChange={handleChange} placeholder="$250,000" className={inputClass} /></div>
                         </div>
                         <div className="grid sm:grid-cols-2 gap-4">
@@ -222,8 +249,9 @@ export default function QuotePage() {
                           <h3 className="font-heading font-bold text-espresso text-sm uppercase tracking-wider">Subcontractor insurance</h3>
                           <p className="text-xs text-mocha/70 mt-0.5">How subcontracted work is covered.</p>
                         </div>
+                        <div><label htmlFor="usesSubcontractors" className={labelClass}>Do you use subcontractors? *</label><select id="usesSubcontractors" name="usesSubcontractors" required value={formData.usesSubcontractors} onChange={handleChange} className={inputClass}><option value="">Select…</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
                         <div className="grid sm:grid-cols-2 gap-4">
-                          <div><label htmlFor="subcontractorsHaveInsurance" className={labelClass}>Do your subcontractors carry their own insurance?</label><select id="subcontractorsHaveInsurance" name="subcontractorsHaveInsurance" value={formData.subcontractorsHaveInsurance} onChange={handleChange} className={inputClass}><option value="">Select…</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
+                          <div><label htmlFor="subsCarryInsurance" className={labelClass}>Do your subcontractors carry their own insurance?</label><select id="subsCarryInsurance" name="subsCarryInsurance" value={formData.subsCarryInsurance} onChange={handleChange} className={inputClass}><option value="">Select…</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
                           <div><label htmlFor="percentSubcontractorsInsured" className={labelClass}>Percentage of subcontractors insured</label><input id="percentSubcontractorsInsured" name="percentSubcontractorsInsured" type="text" inputMode="numeric" value={formData.percentSubcontractorsInsured} onChange={handleChange} placeholder="100" className={inputClass} /></div>
                         </div>
                         <div><label htmlFor="coverageForUninsuredSubcontractors" className={labelClass}>Do you need coverage for uninsured subcontractors?</label><select id="coverageForUninsuredSubcontractors" name="coverageForUninsuredSubcontractors" value={formData.coverageForUninsuredSubcontractors} onChange={handleChange} className={inputClass}><option value="">Select…</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
@@ -234,11 +262,32 @@ export default function QuotePage() {
                           <h3 className="font-heading font-bold text-espresso text-sm uppercase tracking-wider">Current or prior coverage</h3>
                           <p className="text-xs text-mocha/70 mt-0.5">Who covers you today, if anyone.</p>
                         </div>
+                        <div><label htmlFor="currentlyInsured" className={labelClass}>Are you currently insured? *</label><select id="currentlyInsured" name="currentlyInsured" required value={formData.currentlyInsured} onChange={handleChange} className={inputClass}><option value="">Select…</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
                         <div className="grid sm:grid-cols-2 gap-4">
-                          <div><label htmlFor="priorCarrierName" className={labelClass}>Current or prior carrier</label><input id="priorCarrierName" name="priorCarrierName" type="text" value={formData.priorCarrierName} onChange={handleChange} placeholder="Carrier name" className={inputClass} /></div>
+                          <div><label htmlFor="currentCarrier" className={labelClass}>Current or prior carrier</label><input id="currentCarrier" name="currentCarrier" type="text" value={formData.currentCarrier} onChange={handleChange} placeholder="Carrier name" className={inputClass} /></div>
                           <div><label htmlFor="priorPolicyNumber" className={labelClass}>Policy number</label><input id="priorPolicyNumber" name="priorPolicyNumber" type="text" value={formData.priorPolicyNumber} onChange={handleChange} placeholder="Policy number" className={inputClass} /></div>
                         </div>
-                        <div><label htmlFor="priorPolicyExpiration" className={labelClass}>Policy expiration date</label><input id="priorPolicyExpiration" name="priorPolicyExpiration" type="date" value={formData.priorPolicyExpiration} onChange={handleChange} className={inputClass} /></div>
+                        <div><label htmlFor="currentPolicyExpiration" className={labelClass}>Policy expiration date</label><input id="currentPolicyExpiration" name="currentPolicyExpiration" type="date" value={formData.currentPolicyExpiration} onChange={handleChange} className={inputClass} /></div>
+                      </div>
+
+                      <div className="space-y-4 pt-5 border-t border-adobe">
+                        <div>
+                          <h3 className="font-heading font-bold text-espresso text-sm uppercase tracking-wider">Loss history</h3>
+                          <p className="text-xs text-mocha/70 mt-0.5">Claims in the last three years, if any.</p>
+                        </div>
+                        <div><label htmlFor="lossesLast3Years" className={labelClass}>Any losses/claims in the last 3 years? *</label><select id="lossesLast3Years" name="lossesLast3Years" required value={formData.lossesLast3Years} onChange={handleChange} className={inputClass}><option value="">Select…</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
+                        <div className="grid sm:grid-cols-2 gap-4">
+                          <div><label htmlFor="lossCount" className={labelClass}>Number of losses</label><input id="lossCount" name="lossCount" type="text" inputMode="numeric" value={formData.lossCount} onChange={handleChange} placeholder="1" className={inputClass} /></div>
+                          <div><label htmlFor="lossDescription" className={labelClass}>Loss description</label><input id="lossDescription" name="lossDescription" type="text" value={formData.lossDescription} onChange={handleChange} placeholder="Date, type, amount, status" className={inputClass} /></div>
+                        </div>
+                      </div>
+
+                      <div className="space-y-4 pt-5 border-t border-adobe">
+                        <div>
+                          <h3 className="font-heading font-bold text-espresso text-sm uppercase tracking-wider">Coverage requested</h3>
+                          <p className="text-xs text-mocha/70 mt-0.5">When you need this policy to start.</p>
+                        </div>
+                        <div><label htmlFor="desiredEffectiveDate" className={labelClass}>Desired effective date *</label><input id="desiredEffectiveDate" name="desiredEffectiveDate" type="date" required value={formData.desiredEffectiveDate} onChange={handleChange} className={inputClass} /></div>
                       </div>
 
                       <div className="space-y-4 pt-5 border-t border-adobe">
@@ -258,8 +307,8 @@ export default function QuotePage() {
                       </div>
 
                       <div>
-                        <label htmlFor="message" className={labelClass}>Tell us about your operation <span className="text-mocha/60 font-normal">(optional)</span></label>
-                        <textarea id="message" name="message" rows={4} value={formData.message} onChange={handleChange} placeholder={COPY.quote.messagePlaceholder} className={`${inputClass} resize-none`} />
+                        <label htmlFor="notes" className={labelClass}>Tell us about your operation <span className="text-mocha/60 font-normal">(optional)</span></label>
+                        <textarea id="notes" name="notes" rows={4} value={formData.notes} onChange={handleChange} placeholder={COPY.quote.messagePlaceholder} className={`${inputClass} resize-none`} />
                       </div>
 
                       {error && <p className="text-red-600 text-sm font-medium">{error}</p>}
