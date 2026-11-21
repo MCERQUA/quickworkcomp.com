@@ -10,6 +10,8 @@ import { US_STATES, QUOTE_SERVICE_TYPES, YEARS_OPTIONS, COPY } from "@/lib/conte
 import { CheckCircle2, ShieldCheck, ArrowRight, Phone, Clock, Zap, MapPin } from "lucide-react";
 import { OwnersFieldset } from "@/components/forms/OwnersFieldset";
 import { submitLead } from "@/lib/submit-lead";
+import { AcordWcFields, SignatureFields } from "@/components/forms/AcordWcFields";
+import { ENTITY_TYPES_EXTRA, localToday, validateAcordExtras, type Problem } from "@/components/forms/acord-wc-spec";
 
 
 const trustItems = [
@@ -32,6 +34,7 @@ export default function QuotePage() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [problems, setProblems] = useState<Problem[]>([]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -40,10 +43,23 @@ export default function QuotePage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (formData["bot-field"]) return;
-    setSubmitting(true);
+    const form = e.currentTarget;
+    // ACORD 130 extras are uncontrolled inputs: read them from the DOM; React state wins on any shared name.
+    const domValues: Record<string, string> = {};
+    new FormData(form).forEach((v, k) => {
+      if (typeof v === "string") domValues[k] = v;
+    });
+    const all: Record<string, string> = { ...domValues, ...formData, ...ownerFields };
+    const found = validateAcordExtras(all, localToday());
+    setProblems(found);
     setError("");
+    if (found.length > 0) {
+      form.querySelector<HTMLElement>(`[name="${found[0].name}"]`)?.focus();
+      return;
+    }
+    setSubmitting(true);
     try {
-      const ok = await submitLead("quote", { ...formData, ...ownerFields });
+      const ok = await submitLead("quote", all);
       if (ok) setSubmitted(true);
       else setError(COPY.quote.errorMessage);
     } catch {
@@ -129,10 +145,11 @@ export default function QuotePage() {
                             <option value="Corporation">Corporation</option>
                             <option value="LLC">LLC</option>
                             <option value="Joint venture">Joint venture</option>
+                            {ENTITY_TYPES_EXTRA.map((t) => (<option key={t} value={t}>{t}</option>))}
                             <option value="Other">Other</option>
                           </select>
                         </div>
-                        <div><label htmlFor="fein" className={labelClass}>FEIN (business tax ID) *</label><input id="fein" name="fein" type="text" required value={formData.fein} onChange={handleChange} placeholder="12-3456789" className={inputClass} /></div>
+                        <div><label htmlFor="fein" className={labelClass}>FEIN (business tax ID) *</label><input id="fein" name="fein" type="text" inputMode="numeric" autoComplete="off" maxLength={10} pattern="\d{2}-\d{7}" title="FEIN format: 12-3456789" required aria-describedby="fein-help" value={formData.fein} onChange={handleChange} placeholder="12-3456789" className={inputClass} /><p id="fein-help" className="mt-1 text-xs text-mocha">Do not enter a Social Security Number.</p></div>
                       </div>
 
                         <div className="grid sm:grid-cols-2 gap-4">
@@ -358,6 +375,16 @@ export default function QuotePage() {
                         <textarea id="notes" name="notes" rows={4} value={formData.notes} onChange={handleChange} placeholder={COPY.quote.messagePlaceholder} className={`${inputClass} resize-none`} />
                       </div>
 
+                      <AcordWcFields inputClass={inputClass} labelClass={labelClass} mutedTextClass="text-mocha" borderClass="border-adobe" />
+
+                      <SignatureFields inputClass={inputClass} labelClass={labelClass} mutedTextClass="text-mocha" />
+
+                      {problems.length > 0 && (
+                        <div role="alert" className="rounded-xl border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-800">
+                          <p className="font-bold mb-1">Please fix the following before sending:</p>
+                          <ul className="list-disc pl-5">{problems.map((p) => <li key={p.name}>{p.message}</li>)}</ul>
+                        </div>
+                      )}
                       {error && <p className="text-red-600 text-sm font-medium">{error}</p>}
 
                       <button type="submit" disabled={submitting} className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-clay-gradient text-white font-heading font-bold rounded-full shadow-warm hover:shadow-warm-lg hover:-translate-y-0.5 transition-all disabled:opacity-60 disabled:cursor-not-allowed">
