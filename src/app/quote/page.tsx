@@ -10,8 +10,8 @@ import { US_STATES, QUOTE_SERVICE_TYPES, YEARS_OPTIONS, COPY } from "@/lib/conte
 import { CheckCircle2, ShieldCheck, ArrowRight, Phone, Clock, Zap, MapPin } from "lucide-react";
 import { OwnersFieldset } from "@/components/forms/OwnersFieldset";
 import { submitLead } from "@/lib/submit-lead";
-import { AcordWcFields, SignatureFields } from "@/components/forms/AcordWcFields";
-import { ENTITY_TYPES_EXTRA, localToday, validateAcordExtras, type Problem } from "@/components/forms/acord-wc-spec";
+import { AcordWcFields } from "@/components/forms/AcordWcFields";
+import { ENTITY_TYPES_EXTRA, validateAcordExtras, type Problem } from "@/components/forms/acord-wc-spec";
 
 
 const trustItems = [
@@ -50,7 +50,7 @@ export default function QuotePage() {
       if (typeof v === "string") domValues[k] = v;
     });
     const all: Record<string, string> = { ...domValues, ...formData, ...ownerFields };
-    const found = validateAcordExtras(all, localToday());
+    const found = validateAcordExtras(all);
     setProblems(found);
     setError("");
     if (found.length > 0) {
@@ -376,8 +376,6 @@ export default function QuotePage() {
                       </div>
 
                       <AcordWcFields inputClass={inputClass} labelClass={labelClass} mutedTextClass="text-mocha" borderClass="border-adobe" />
-
-                      <SignatureFields inputClass={inputClass} labelClass={labelClass} mutedTextClass="text-mocha" />
 
                       {problems.length > 0 && (
                         <div role="alert" className="rounded-xl border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-800">
