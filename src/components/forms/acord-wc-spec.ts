@@ -21,6 +21,8 @@ export const CLASS_ROWS = 5;
 export const PRIOR_ROWS = 5; // rows 2..5 only; year 1 keeps the site's existing currentCarrier / currentPolicyExpiration / loss* fields
 export const OWNER_ROWS = 6;
 
+export const PRIOR_YEAR1_YEAR: TextDef = { name: "priorYear1Year", label: "Most recent policy year", placeholder: "2025", inputMode: "numeric", max: 4 };
+
 export const ELECTION_INCLUDE = "Included";
 export const ELECTION_EXCLUDE = "Excluded";
 
@@ -128,6 +130,8 @@ export const ownerExtraNames = (i: number) => {
     election: `ownerIncludedExcluded${s}`,
     classCode: `ownerClassCode${s}`,
     payroll: `ownerPayroll${s}`,
+    // Title / relationship is always numbered (row 1 = ownerTitleRelationship1), unlike the unnumbered row-1 fields above.
+    titleRel: `ownerTitleRelationship${i + 1}`,
   };
 };
 
@@ -177,11 +181,13 @@ export function allNewFieldNames(): string[] {
   names.push(COVERAGE_OTHER.name);
   for (let n = 1; n <= CLASS_ROWS; n++) add(classFields(n));
   names.push(EXPERIENCE.name);
+  names.push(PRIOR_YEAR1_YEAR.name);
   for (let n = 2; n <= PRIOR_ROWS; n++) add(priorFields(n));
   for (let i = 0; i < OWNER_ROWS; i++) {
     const o = ownerExtraNames(i);
-    names.push(o.duties, o.election, o.classCode, o.payroll);
+    names.push(o.duties, o.election, o.classCode, o.payroll, o.titleRel);
   }
+  names.push("ownerName1"); // hidden mirror of row 1's ownerNames (OwnersFieldset)
   UW_QUESTIONS.forEach((q) => names.push(q.name, explanationName(q.name)));
   names.push(WORK_FROM_HOME_COUNT.name);
   return names;

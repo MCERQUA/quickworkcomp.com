@@ -19,6 +19,7 @@ import {
   classFields,
   explanationName,
   priorFields,
+  PRIOR_YEAR1_YEAR,
   type TextDef,
 } from "./acord-wc-spec";
 
@@ -146,6 +147,7 @@ export function AcordWcFields({ inputClass, labelClass, mutedTextClass = "text-m
 
       <Group title="Experience mod and past coverage" note="Carrier name, premium and claims for earlier policy years (the most recent year is covered in Current or prior coverage and Loss history above). Enter 0 if there were no claims. Do not include policy numbers or claimant names." borderClass={borderClass}>
         {text(EXPERIENCE)}
+        {text(PRIOR_YEAR1_YEAR)}
         {Array.from({ length: PRIOR_ROWS - 1 }, (_, i) => i + 2).map((n) => (
           <details key={n} className={`rounded-xl border ${borderClass} px-4 py-3`}>
             <summary className="cursor-pointer min-h-[44px] flex items-center text-sm font-semibold">{`Policy year ${n} back`}</summary>
